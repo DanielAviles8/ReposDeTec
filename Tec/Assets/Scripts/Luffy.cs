@@ -5,7 +5,7 @@ using UnityEngine;
 public class Luffy : MonoBehaviour
 
 {
-    public Over Over;
+    
     Rigidbody2D MDLuffy;
     public float maxspeed;
 
@@ -81,16 +81,16 @@ public class Luffy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ovni")
         {
-            Over.perder();
+           
         }
     }
-    public void OnTriggerEnter2D(Collider other)
-    {
-        if (other.gameObject.CompareTag("Moneda"))
-        {
-            other.gameObject.SetActive(false);
-            Moneda = Moneda + 1;
-        }
+    //public void OnTriggerEnter2D(Collider other)
+    //{
+      //  if (other.gameObject.CompareTag("Moneda"))
+        //{
+          //  other.gameObject.SetActive(false);
+           // Moneda = Moneda + 1;
+        //}
 
-    }
+    //}
 }

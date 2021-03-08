@@ -5,7 +5,7 @@ using UnityEngine;
 public class FixedLuffy : MonoBehaviour
 
 {
-    public Over Over;
+    
     Rigidbody2D player;
     public float maxSpeed;
 
@@ -82,17 +82,17 @@ public class FixedLuffy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ovni")
         {
-            Over.lose();
+            
         }
     }
-    public void OnTriggerEnter2D(Collider other)
-    {
+    //public void OnTriggerEnter2D(Collider other)
+    //{
         //Como el if esta usando un Tag no le cambie "Moneda" a ingles porque tendria que cambiar el Tag tambien
-        if (other.gameObject.CompareTag("Moneda"))
-        {
-            other.gameObject.SetActive(false);
-            Coin = Coin + 1;
-        }
+      //  if (other.gameObject.CompareTag("Moneda"))
+        //{
+          //  other.gameObject.SetActive(false);
+            //Coin = Coin + 1;
+        //}
 
-    }
+    //}
 }
