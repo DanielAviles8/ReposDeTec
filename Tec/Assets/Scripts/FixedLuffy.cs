@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Luffy : MonoBehaviour
+public class FixedLuffy : MonoBehaviour
 
 {
     public Over Over;
@@ -30,6 +30,16 @@ public class Luffy : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+        Jump();
+    }
+    private void FixedUpdate()
+    {
+        FlipSprite();
+    }
+
+    public void Move()
     {
         if (jump && floor && Input.GetAxis("Jump") > 0)
         {
@@ -59,22 +69,15 @@ public class Luffy : MonoBehaviour
             player.velocity = new Vector2(0, player.velocity.y);
         }
     }
-
-
-
     void FlipSprite()
     {
         flipLeft = !flipLeft;
         flipPlayer.flipX = !flipPlayer.flipX;
     }
-
-
-
     public void Jump()
     {
         jump = !jump;
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ovni")
