@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Circle
+public class Triangle
 {
-    //Atributes
     public int numberOfEdges;
-    public int radious;
+    public int sideLength;
 
-    public Circle(int anumberOfEdges, int aradious)
+    public Triangle(int anumberOfEdges, int asideLenght)
     {
         numberOfEdges = anumberOfEdges;
-        radious = aradious;
+        sideLength = asideLenght;
     }
-    
 }

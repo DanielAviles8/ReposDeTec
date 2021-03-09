@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Square : MonoBehaviour
+public class Square
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Atributos
+    public int numberOfEdges;
+    public int sideLenght;
 
-    // Update is called once per frame
-    void Update()
+    public Square(int anumberOfEdges, int asideLenght)
     {
-        
+        numberOfEdges = anumberOfEdges;
+        sideLenght = asideLenght;
     }
 }
