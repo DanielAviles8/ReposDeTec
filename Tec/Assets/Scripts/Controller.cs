@@ -13,10 +13,10 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
-        ChooseFigure();
+        
     }
 
-    void ChooseFigure()
+    public void ChooseFigure()
     {
         chooseFigure = Random.Range(1, 5);
         if (chooseFigure == 1)
