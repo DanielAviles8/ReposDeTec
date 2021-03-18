@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 1922366325}
   - component: {fileID: 1922366324}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Generar Libro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,7 +606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3bd2c65694cc04a989427fb9abcfad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrabook: {fileID: 0}
 --- !u!4 &2009000481
 Transform:
   m_ObjectHideFlags: 0
