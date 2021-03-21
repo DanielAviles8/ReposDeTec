@@ -18,6 +18,16 @@ public class BookWithMoreAt : Book
         bookStatus = abookStatus;
         coverColor = acoverColor;
     }
+    public BookWithMoreAt(int atitle, int aauthor, int aNumberOfPages, int agenre, int areleaseYear, int abookStatus, int acoverColor)
+    {
+        Title = atitle;
+        Author = aauthor;
+        NumberOfPages = aNumberOfPages;
+        genre = agenre;
+        releaseYear = areleaseYear;
+        bookStatus = abookStatus;
+        coverColor = acoverColor;
+    }
     public int Genre
     {
         get { return genre; }
@@ -37,6 +47,12 @@ public class BookWithMoreAt : Book
     {
         get { return coverColor; }
         set { coverColor = value; }
+    }
+    public string GetInfo()
+    {
+        string temporal;
+        temporal = Title.ToString() + Author.ToString() + NumberOfPages.ToString() + Genre.ToString() + ReleaseYear.ToString() + BookStatus.ToString() + CoverColor.ToString();
+        return temporal;
     }
 
 }

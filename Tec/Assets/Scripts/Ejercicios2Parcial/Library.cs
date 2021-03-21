@@ -1,28 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Library : MonoBehaviour
 {
-    public Book extrabook = new Book(0, 0, 0);
-    public BookWithMoreAt  booknew = new BookWithMoreAt(0, 0, 0, 0);
-    private void AddBook()
+    public BookWithMoreAt booknew = new BookWithMoreAt(0, 0, 0, 0, 0, 0, 0);
+    private int lenghtLibrary;
+    [SerializeField] private GameObject buttonReplace;
+    [SerializeField] private GameObject buttonAdd;
+    [SerializeField] private GameObject buttonShow;
+    [SerializeField] private GameObject buttonOne;
+    [SerializeField] private GameObject buttonTwo;
+    [SerializeField] private GameObject buttonThree;
+
+    public int LenghtLibrary
     {
-        ChangeAtributtes();
+        get { return lenghtLibrary; }
+        set { lenghtLibrary = value; }
     }
-    private void Update()
+
+    List<BookWithMoreAt> books = new List<BookWithMoreAt>();
+
+    void Awake()
     {
-        extrabook.Title = Random.Range(1, 6);
-        extrabook.Author = Random.Range(1, 6);
-        extrabook.NumberOfPages = Random.Range(50, 201);
-        booknew.Genre = Random.Range(1, 6);
-        booknew.ReleaseYear = Random.Range(1999, 2021);
-        booknew.BookStatus = Random.Range(1, 3);
-        booknew.CoverColor = Random.Range(1, 6);
+        lenghtLibrary = 3;
+        Debug.Log("Espacios restantes en librería: " + lenghtLibrary);
+        buttonReplace.SetActive(false);
+        buttonOne.SetActive(false);
+        buttonTwo.SetActive(false);
+        buttonThree.SetActive(false);
     }
-    public void ChangeAtributtes()
+    public BookWithMoreAt GenerateBook()
     {
-        switch (extrabook.Title)
+        if (lenghtLibrary > 0)
+        {
+            //books.Add(extrabook);
+            booknew.Title = Random.Range(1, 6);
+            booknew.Author = Random.Range(1, 6);
+            booknew.NumberOfPages = Random.Range(50, 201);
+            booknew.Genre = Random.Range(1, 6);
+            booknew.ReleaseYear = Random.Range(1999, 2021);
+            booknew.BookStatus = Random.Range(1, 3);
+            booknew.CoverColor = Random.Range(1, 6);
+        }
+        return booknew;
+    }  
+    public void ButtonReplace()
+    {
+        buttonOne.SetActive(true);
+        buttonTwo.SetActive(true);
+        buttonThree.SetActive(true);
+    }
+    void GetInfo(int index)
+    {
+        BookWithMoreAt temporal = books[index];
+        books.RemoveAt(index);
+    }
+    public void RemoveBookOne()
+    {
+        books.RemoveAt(1);
+    }
+    public void RemoveBookTwo()
+    {
+        books.RemoveAt(2);
+    }
+    public void RemoveBookThree()
+    {
+        books.RemoveAt(3);
+    }
+    public void AddBook(BookWithMoreAt bookTest)
+    {
+        if(books.Count < 3)
+        {
+            Print(bookTest);
+            books.Add(bookTest);
+        }
+        else
+        {
+            buttonReplace.SetActive(true);
+            Debug.Log("La librería esta llena");
+        }
+    }    
+    public void AddBookButton()
+    {
+        AddBook(GenerateBook());
+    }
+    public void Print(BookWithMoreAt bookOne)
+    {
+        switch (bookOne.Title)
         {
             case 1:
                 {
@@ -51,7 +117,7 @@ public class Library : MonoBehaviour
                 }
         }
 
-        switch (extrabook.Author)
+        switch (bookOne.Author)
         {
             case 1:
                 {
@@ -79,12 +145,12 @@ public class Library : MonoBehaviour
                     break;
                 }
         }
-        if (extrabook.NumberOfPages > 0)
+        if (bookOne.NumberOfPages > 0)
         {
-            Debug.Log("Número de páginas: " + extrabook.NumberOfPages);
+            Debug.Log("Número de páginas: " + bookOne.NumberOfPages);
         }
 
-        switch (booknew.Genre)
+        switch (bookOne.Genre)
         {
             case 1:
                 {
@@ -112,11 +178,11 @@ public class Library : MonoBehaviour
                     break;
                 }
         }
-        if(booknew.ReleaseYear > 0)
+        if (bookOne.ReleaseYear > 0)
         {
-            Debug.Log("Año de publicación: " + booknew.ReleaseYear);
+            Debug.Log("Año de publicación: " + bookOne.ReleaseYear);
         }
-        switch (booknew.BookStatus)
+        switch (bookOne.BookStatus)
         {
             case 1:
                 {
@@ -130,7 +196,7 @@ public class Library : MonoBehaviour
                 }
         }
 
-        switch (booknew.CoverColor)
+        switch (bookOne.CoverColor)
         {
             case 1:
                 {
@@ -158,9 +224,6 @@ public class Library : MonoBehaviour
                     break;
                 }
         }
+
     }
-    
-    
-        
-    
 }

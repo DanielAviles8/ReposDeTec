@@ -7,6 +7,10 @@ public class Book
     private int author;
     private int numberOfPages;
 
+    public Book()
+    {
+
+    }
     public Book (int atitle, int aauthor, int anumberOfPages)
     {
         title = atitle;
@@ -27,9 +31,5 @@ public class Book
     {
         get { return numberOfPages; }
         set { numberOfPages = value; }
-    }
-    public Book()
-    {
-
     }
 }

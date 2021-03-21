@@ -1,42 +1,63 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeController : MonoBehaviour
 {
     Timer timeController = new Timer(0, 0, 0);
 
+    private const float realSecondsDay = 86400f;
+    private float day;
+    public float newHour, newMinute, newSecond;
+
+    private GameObject clockHandHourMovement;
+    private GameObject clockHandMinuteMovement;
+
     public int changeTime;
     public float scaleTime = 1;
 
-    private float timeFrameScale = 0f;
-    private float timeShowSecond = 0f;
-    private float scaleInitialTime;
+    public Text textTime;
 
-    void Start()
+    private void Awake()
     {
-        scaleInitialTime = scaleTime;
-        timeShowSecond = changeTime;
-        CountTime(changeTime);
+        clockHandHourMovement = GameObject.FindGameObjectWithTag("HandHour");
+        clockHandMinuteMovement = GameObject.FindGameObjectWithTag("HandMinute");
+        if(textTime == null) textTime = GetComponent<Text>();
     }
     void Update()
     {
-        timeFrameScale = Time.deltaTime * scaleTime;
-        timeShowSecond += timeFrameScale;
-        CountTime(timeShowSecond);
+        CountTime();
     }
-    public void CountTime(float timeInSeconds)
+    public void CountTime()
     {
-        timeController.GetSecond = 0;
-        timeController.GetMinute = 0;
-        timeController.GetHour = 0;
+        day += Time.deltaTime / realSecondsDay;
 
-        timeController.GetMinute = (int)timeInSeconds / 60;
-        timeController.GetSecond = (int)timeInSeconds & 60;
-        timeController.GetHour = (int)timeInSeconds / 3600;
+        float dayNormalized = day % 1f;
+        float rotationsDay = 360f;
+
+        clockHandHourMovement.gameObject.transform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationsDay);
+
+        float hoursInDay = 24f;
+        clockHandMinuteMovement.gameObject.transform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationsDay * hoursInDay);
+
+        timeController.GetHour = Mathf.Floor(dayNormalized * hoursInDay);
+
+        float minutesInHour = 60f;
+        timeController.GetMinute = Mathf.Floor(((dayNormalized * hoursInDay) % 1f) * minutesInHour);
+
+        float secondsInMinute = 60f;
+        timeController.GetSecond = Mathf.Floor(((((dayNormalized * hoursInDay) % 1f) * minutesInHour) %1f)*secondsInMinute);
+
+        textTime.text = timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond;
     }
-    public void ShowTime()
+    public void ChangeTime()
     {
-        Debug.Log(timeController.GetHour + " hr " + timeController.GetMinute + " min " + timeController.GetSecond + " sec ");
+        timeController.GetSecond = newSecond;
+        timeController.GetMinute = newMinute;
+        timeController.GetHour = newHour;
+
+        Debug.Log(timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond);
+        textTime.text = timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond;
     }
 }
