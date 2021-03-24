@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class CarController : MonoBehaviour
 {
-    System.Random randomCarSelected = new System.Random();
-    List<CarAtributes> carlist = new List<CarAtributes>();
+    System.Random randomSelection = new System.Random();
+    List<CarAtributes> listOfCars = new List<CarAtributes>();
     CarAtributes carOne = new CarAtributes(4, 4, 8, 4395, 275, 6, "BMW x6M");
     CarAtributes carTwo = new CarAtributes(2, 4, 8, 2995, 250, 6, "Audi S5 Cabriolet");
     CarAtributes carThree = new CarAtributes(5, 5, 8, 1332, 199, 6, "2020 Jeep Renegade");
@@ -17,47 +17,47 @@ public class CarController : MonoBehaviour
     CarAtributes carTen = new CarAtributes(2, 4, 5, 2480, 250, 7, "Audi TT RS Roadster");
     private void Awake()
     {
-        carlist.Add(carOne);
-        carlist.Add(carTwo);
-        carlist.Add(carThree);
-        carlist.Add(carFour);
-        carlist.Add(carFive);
-        carlist.Add(carFive);
-        carlist.Add(carSeven);
-        carlist.Add(carEight);
-        carlist.Add(carNine);
-        carlist.Add(carTen);
+        listOfCars.Add(carOne);
+        listOfCars.Add(carTwo);
+        listOfCars.Add(carThree);
+        listOfCars.Add(carFour);
+        listOfCars.Add(carFive);
+        listOfCars.Add(carFive);
+        listOfCars.Add(carSeven);
+        listOfCars.Add(carEight);
+        listOfCars.Add(carNine);
+        listOfCars.Add(carTen);
     }
-    public void SelectCars()
+    public void ChooseCar()
     {
-        int randomCar1 = randomCarSelected.Next(1, carlist.Count);
-        int randomCar2 = randomCarSelected.Next(1, carlist.Count);
-        Debug.Log(randomCar1);
-        Debug.Log(randomCar2);
-        CompareCars(randomCar1, randomCar2);
+        int randomOne = randomSelection.Next(1, listOfCars.Count);
+        int randomTwo = randomSelection.Next(1, listOfCars.Count);
+        Debug.Log(randomOne);
+        Debug.Log(randomTwo);
+        CompiteCars(randomOne, randomTwo);
     }
-    public void CompareCars(int index1, int index2)
+    public void CompiteCars(int index1, int index2)
     {
 
-        int goalDistance = 200;
+        int goalDraw = 200;
         float distanceCar1;
         float distanceCar2;
         float timeCar1;
         float timeCar2;
         float lossTimeCar;
 
-        CarAtributes tempo1 = carlist[index1];
-        CarAtributes tempo2 = carlist[index2];
+        CarAtributes fisrtPlaza = listOfCars[index1];
+        CarAtributes secondPlaza = listOfCars[index2];
 
-        Debug.Log("Autos en carrera");
-        Debug.Log(carlist[index1].AtributesToString(tempo1));
-        Debug.Log(carlist[index2].AtributesToString(tempo2));
+        Debug.Log("*empieza a sonar Bandolero de fondo");
+        Debug.Log(listOfCars[index1].AtributesToString(fisrtPlaza));
+        Debug.Log(listOfCars[index2].AtributesToString(secondPlaza));
 
-        distanceCar1 = carlist[index1].MaxVelocity / 3.6f;
-        distanceCar2 = carlist[index2].MaxVelocity / 3.6f;
+        distanceCar1 = listOfCars[index1].MaxVelocity / 3.6f;
+        distanceCar2 = listOfCars[index2].MaxVelocity / 3.6f;
 
-        timeCar1 = distanceCar1 / goalDistance;
-        timeCar2 = distanceCar2 / goalDistance;
+        timeCar1 = distanceCar1 / goalDraw;
+        timeCar2 = distanceCar2 / goalDraw;
 
         Debug.Log("Tiempo Carro 1 = " + timeCar1 + " seg " + "TiempoCarro 2 =" + +timeCar2 + " seg");
 
@@ -98,6 +98,6 @@ public class CarController : MonoBehaviour
         Debug.Log("CARRO 9 = " + carNine.AtributesToString(carNine));
         Debug.Log("CARRO 10 = " + carTen.AtributesToString(carTen));
 
-        Debug.Log(carlist.Count);
+        Debug.Log(listOfCars.Count);
     }
 }

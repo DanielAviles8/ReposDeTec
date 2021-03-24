@@ -13,11 +13,17 @@ public class TimeController : MonoBehaviour
 
     private GameObject clockHandHourMovement;
     private GameObject clockHandMinuteMovement;
+    public GameObject setTimeButton;
 
     public int changeTime;
     public float scaleTime = 1;
 
     public Text textTime;
+    public Text setTime;
+
+    public float setHour;
+    public float setMinute;
+    public float setSecond;
 
     private void Awake()
     {
@@ -49,15 +55,144 @@ public class TimeController : MonoBehaviour
         float secondsInMinute = 60f;
         timeController.GetSecond = Mathf.Floor(((((dayNormalized * hoursInDay) % 1f) * minutesInHour) %1f)*secondsInMinute);
 
-        textTime.text = timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond;
-    }
-    public void ChangeTime()
-    {
-        timeController.GetSecond = newSecond;
-        timeController.GetMinute = newMinute;
-        timeController.GetHour = newHour;
+        if(timeController.GetHour >= 10)
+        {
+            textTime.text = timeController.GetHour + ":" + timeController.GetMinute + ":" + timeController.GetSecond;
 
-        Debug.Log(timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond);
-        textTime.text = timeController.GetHour + ":" + timeController.GetMinute + " : " + timeController.GetSecond;
+            if(timeController.GetMinute >= 10)
+            {
+                textTime.text = timeController.GetHour + ":" + timeController.GetMinute + ":" + timeController.GetSecond;
+
+                if(timeController.GetSecond >= 10)
+                {
+                    textTime.text = timeController.GetHour + ":" + timeController.GetMinute + ":" + timeController.GetSecond;
+                }
+                if(timeController.GetSecond <= 9)
+                {
+                    textTime.text = timeController.GetHour + ":" + timeController.GetMinute + ":" + "0" + timeController.GetSecond;
+                }
+            }
+            if(timeController.GetMinute <= 9)
+            {
+                textTime.text = timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + timeController.GetSecond;
+
+                if (timeController.GetSecond >= 10)
+                {
+                    textTime.text = timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + timeController.GetSecond;
+                }
+                if (timeController.GetSecond <= 9)
+                {
+                    textTime.text = timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + "0" + timeController.GetSecond;
+                }
+            }
+        }
+        if (timeController.GetHour <= 9)
+        {
+            textTime.text = "0" + timeController.GetHour + ":" + timeController.GetMinute + ":" + timeController.GetSecond;
+
+            if(timeController.GetMinute >= 10)
+            {
+                textTime.text = "0" + timeController.GetHour + ":" + timeController.GetMinute + ":" + timeController.GetSecond;
+
+                if(timeController.GetSecond >= 10)
+                {
+                    textTime.text = "0" + timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + timeController.GetSecond;
+                }
+                if (timeController.GetSecond <= 9)
+                {
+                    textTime.text = "0" + timeController.GetHour + ":" + timeController.GetMinute + ":" + "0" + timeController.GetSecond;
+                }
+            }
+            if(timeController.GetMinute <= 9)
+            {
+                textTime.text = "0" + timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + timeController.GetSecond;
+
+                if(timeController.GetSecond >= 10)
+                {
+                    textTime.text = "0" + timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + timeController.GetSecond;
+                }
+                if(timeController.GetSecond <= 9)
+                {
+                    textTime.text = "0" + timeController.GetHour + ":" + "0" + timeController.GetMinute + ":" + "0" + timeController.GetSecond;
+                }
+            }
+        }
+    }
+    public void SetTimeButton()
+    {
+        day += Time.deltaTime / realSecondsDay;
+
+        float dayNormalized = day % 1f;
+        float hoursInDay = 24f;
+        setHour = Mathf.Floor(dayNormalized * hoursInDay);
+
+        float minutesInHour = 60f;
+        setMinute = Mathf.Floor(((dayNormalized * hoursInDay) % 1f) * minutesInHour);
+
+        float secondsInMinute = 60f;
+        setSecond = Mathf.Floor(((((dayNormalized * hoursInDay) % 1f) * minutesInHour) % 1f) * secondsInMinute);
+
+        if (setHour >= 10)
+        {
+            setTime.text = setHour + ":" + setMinute + ":" + setSecond;
+
+            if (setMinute >= 10)
+            {
+                setTime.text = setHour + ":" + setMinute + ":" + setSecond;
+
+                if (setSecond >= 10)
+                {
+                    setTime.text = setHour + ":" + setMinute + ":" + setSecond;
+                }
+                if (setSecond <= 9)
+                {
+                    setTime.text = setHour + ":" + setMinute + ":" + "0" + setSecond;
+                }
+            }
+            if (setMinute <= 9)
+            {
+                setTime.text = setHour + ":" + "0" + setMinute + ":" + setSecond;
+
+                if (setSecond >= 10)
+                {
+                    setTime.text = setHour + ":" + "0" + setMinute + ":" + setSecond;
+                }
+                if (setSecond <= 9)
+                {
+                    setTime.text = setHour + ":" + "0" + setMinute + ":" + "0" + setSecond;
+                }
+            }
+        }
+        if (setHour <= 9)
+        {
+            setTime.text = "0" + setHour + ":" + setMinute + ":" + setSecond;
+
+            if (setMinute >= 10)
+            {
+                setTime.text = "0" + setHour + ":" + setMinute + ":" + setSecond;
+
+                if (setSecond >= 10)
+                {
+                    setTime.text = "0" + setHour + ":" + "0" + setMinute + ":" + setSecond;
+                }
+                if (setSecond <= 9)
+                {
+                    setTime.text = "0" + setHour + ":" + setMinute + ":" + "0" + setSecond;
+                }
+            }
+            if (setMinute <= 9)
+            {
+                setTime.text = "0" + setHour + ":" + "0" + setMinute + ":" + setSecond;
+
+                if (setSecond >= 10)
+                {
+                    setTime.text = "0" + setHour + ":" + "0" + setMinute + ":" + setSecond;
+                }
+                if (setSecond <= 9)
+                {
+                    setTime.text = "0" + setHour + ":" + "0" + setMinute + ":" + "0" + setSecond;
+                }
+            }
+        }
     }
 }
